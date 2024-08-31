@@ -26,9 +26,14 @@ const LiveChat = () => {
         setRooms(roomList);
       });
 
+      newConnection.on('ReceiveMessages', (loadedMessages) => {
+        console.log('Gelen Mesajlar:', loadedMessages);
+        setMessages(loadedMessages); // Mesaj geçmişini state'e al
+      });
+
       newConnection.on('ReceiveMessage', (user, message) => {
         // Mesajları güncelle
-        setMessages((prevMessages) => [...prevMessages, { user, message }]);
+        setMessages((prevMessages) => [...(prevMessages || []), { user, message }]);
       });
     } catch (e) {
       console.log('Bağlantı kurulamadı: ', e);
@@ -56,7 +61,9 @@ const LiveChat = () => {
         await connection.invoke('JoinRoom', room);
         console.log(`Odaya katıldı: ${room}`);
         setCurrentRoom(room); // Şu anki odayı ayarla
-        setMessages([]); // Mesajları temizle
+
+        // Odadaki mesaj geçmişini yükle
+        await connection.invoke('LoadMessages', room);
       } catch (e) {
         console.error('Odaya katılma hatası:', e);
       }
@@ -67,7 +74,6 @@ const LiveChat = () => {
     if (connection && message && currentRoom) {
       try {
         await connection.invoke('SendMessage', currentRoom, 'Admin', message);
-        // setMessages((prevMessages) => [...prevMessages, { user: 'Admin', message }]);
         setMessage(''); // Mesaj kutusunu temizle
       } catch (e) {
         console.error('Mesaj gönderilemedi:', e);
@@ -105,23 +111,23 @@ const LiveChat = () => {
                 >
                   {messages.map((m, index) => (
                     <div key={index} className="chat-message">
-                      <strong>{m.user}:</strong> {m.message}
+                      <strong>{m.userName || m.user}:</strong> {m.message}
                     </div>
                   ))}
-                  <div className="card-footer">
-                    <div className="input-group">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Mesajınızı yazın..."
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                      />
-                      <div className="input-group-append">
-                        <button className="btn btn-primary" type="button" onClick={sendMessage}>
-                          Gönder
-                        </button>
-                      </div>
+                </div>
+                <div className="card-footer">
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Mesajınızı yazın..."
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                    />
+                    <div className="input-group-append">
+                      <button className="btn btn-primary" type="button" onClick={sendMessage}>
+                        Gönder
+                      </button>
                     </div>
                   </div>
                 </div>

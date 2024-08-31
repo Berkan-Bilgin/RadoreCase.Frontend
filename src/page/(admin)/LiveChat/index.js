@@ -21,7 +21,15 @@ const LiveChat = () => {
 
       newConnection.invoke('AddAdminToGroup'); // Admin'i gruba ekleyin
 
+      newConnection.invoke('LoadRooms');
+
+      newConnection.on('ReceiveRooms', (roomList) => {
+        console.log(roomList);
+        setRooms(roomList);
+      });
+
       newConnection.on('ReceiveRoomList', (roomList) => {
+        console.log(roomList);
         // Oda listesini güncelle
         setRooms(roomList);
       });
@@ -58,7 +66,7 @@ const LiveChat = () => {
   const joinRoom = async (room) => {
     if (connection) {
       try {
-        await connection.invoke('JoinRoom', room);
+        await connection.invoke('JoinRoomFromAdmin', room);
         console.log(`Odaya katıldı: ${room}`);
         setCurrentRoom(room); // Şu anki odayı ayarla
 

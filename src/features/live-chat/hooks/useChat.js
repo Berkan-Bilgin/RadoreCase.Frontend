@@ -32,7 +32,7 @@ const useChat = () => {
 
   const joinRoom = async (connection, room) => {
     try {
-      await connection.invoke('JoinRoom', room);
+      await connection.invoke('JoinRoomFromUser', room);
     } catch (e) {
       console.error('Odaya katılamadı: ', e);
     }
@@ -43,7 +43,9 @@ const useChat = () => {
       const newConnection = await createConnection();
       if (newConnection) {
         setConnection(newConnection);
-        const room = `room-${newConnection.connection.connectionId}`;
+        // const room = `room-${newConnection.connection.connectionId}`;
+        const room = `Room-User3`;
+
         setRoomName(room);
         await joinRoom(newConnection, room);
       }
@@ -66,7 +68,7 @@ const useChat = () => {
   const sendMessage = async () => {
     if (connection && message) {
       try {
-        await connection.invoke('SendMessage', roomName, 'User1', message);
+        await connection.invoke('SendMessage', roomName, 'User3', message);
         setMessage('');
       } catch (e) {
         console.error('Mesaj gönderilemedi:', e);

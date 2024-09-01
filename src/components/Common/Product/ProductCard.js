@@ -18,12 +18,22 @@ const ProductCard = (props) => {
     console.log('tıklandı');
     dispatch({ type: 'products/addToFavorites', payload: { id } });
   };
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const imageUrl = `${baseUrl}${props.data.img}`;
   return (
     <>
       <div className="product_wrappers_one">
         <div className="thumb">
           <Link to={`/product-details-two/${props.data.id}`} className="image">
-            <img src={img1} alt={props.data.title}></img>
+            <img
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = img1;
+              }}
+              src={imageUrl}
+              alt={props.data.title}
+            ></img>
+
             <img className="hover-image" src={img10} alt={props.data.title} />
           </Link>
           <span className="badges">

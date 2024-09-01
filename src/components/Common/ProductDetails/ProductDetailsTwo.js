@@ -18,6 +18,9 @@ const ProductDetailsTwo = () => {
   const { id } = useParams();
   const product = useSelector((state) => state.products.single);
 
+  const baseUrl = process.env.REACT_APP_BASE_URL;
+  const imageUrl = `${baseUrl}${product.img}`;
+
   useEffect(() => {
     dispatch(fetchProductById(id)); // API'den ürünü çek
   }, [dispatch, id]);
@@ -79,7 +82,14 @@ const ProductDetailsTwo = () => {
                 <div className="product_single_two_img slider-for">
                   <Slider {...settings}>
                     <div className="product_img_two_slider">
-                      <img src={img1} alt="img" />
+                      <img
+                        onError={(e) => {
+                          e.target.onerror = null;
+                          e.target.src = img1;
+                        }}
+                        src={imageUrl}
+                        alt="img"
+                      />
                     </div>
                     <div className="product_img_two_slider">
                       <img src={img2} alt="img" />

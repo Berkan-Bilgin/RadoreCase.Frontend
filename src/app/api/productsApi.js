@@ -17,3 +17,16 @@ export const fetchProductByIdApi = async (id) => {
   }
   return await response.json();
 };
+
+export const createProductApi = async (productData) => {
+  const response = await fetch(BASE_URL, {
+    method: 'POST',
+    body: productData,
+  });
+
+  if (!response.ok) {
+    throw new Error('Ürün ekleme işlemi başarısız oldu');
+  }
+
+  return await response.json();
+};

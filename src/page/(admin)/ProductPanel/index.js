@@ -1,7 +1,12 @@
 import React from 'react';
+import ProductForm from '../../../features/product/add-product/components/ProductForm';
 
 const ProductPanel = () => {
-  return <div>Ürün Yönetim</div>;
+  return (
+    <>
+      <ProductForm />
+    </>
+  );
 };
 
 export default ProductPanel;

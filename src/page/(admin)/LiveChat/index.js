@@ -8,9 +8,11 @@ const LiveChat = () => {
   const [messages, setMessages] = useState([]); // Mesajları tutmak için state
   const [message, setMessage] = useState(''); // Kullanıcının yazdığı mesaj
 
+  const connectionUrl = process.env.REACT_APP_SIGNALR_URL;
+
   const handleConnect = async () => {
     const newConnection = new HubConnectionBuilder()
-      .withUrl('https://localhost:7041/chat')
+      .withUrl(connectionUrl)
       .withAutomaticReconnect()
       .build();
 

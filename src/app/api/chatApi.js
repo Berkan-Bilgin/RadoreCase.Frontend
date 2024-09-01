@@ -1,7 +1,7 @@
 import { HubConnectionBuilder } from '@microsoft/signalr';
 
 const SIGNALR_URL = process.env.REACT_APP_SIGNALR_URL;
-// const SIGNALR_URL = 'https://localhost:7041/chat';
+// const SIGNALR_URL = 'https://localhost:5001/chat';
 
 export const createConnection = async () => {
   const newConnection = new HubConnectionBuilder()

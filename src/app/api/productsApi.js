@@ -1,4 +1,6 @@
-const BASE_URL = 'https://localhost:7245/api/Products';
+// const BASE_URL = 'https://localhost:5001/api/Products';
+
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}/api/Products`;
 
 export const fetchProductsApi = async () => {
   const response = await fetch(`${BASE_URL}`);

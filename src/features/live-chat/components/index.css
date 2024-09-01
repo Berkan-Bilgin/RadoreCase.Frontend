@@ -1,0 +1,10 @@
+.submit-button{
+   position:absolute;
+   width: 95%;
+   bottom: 12px; 
+   
+}
+.messageArea{
+    height: 240px;
+    overflow-y: auto;
+}

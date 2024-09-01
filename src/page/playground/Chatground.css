@@ -1,0 +1,74 @@
+/* chat-styles.css */
+.chat-button {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+   .chat-window {
+    position: fixed;    
+    bottom: 4rem;
+   
+    display: none;
+    right: 1rem;
+    width: 500px;
+    height: 400px;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+  } 
+  
+  .chat-window-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .chat-window-header h5 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  .chat-window-header button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+  
+  .chat-window-body {
+    /* flex: 1;
+    overflow-y: auto;
+    margin-bottom: 1rem; */
+  }
+  
+  .chat-window-input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .chat-window-send {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

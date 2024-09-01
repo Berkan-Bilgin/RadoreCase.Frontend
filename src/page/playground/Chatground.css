@@ -9,12 +9,12 @@
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    z-index: 1000;
   }
   
    .chat-window {
     position: fixed;    
-    bottom: 4rem;
-   
+    bottom: 4rem;   
     display: none;
     right: 1rem;
     width: 500px;

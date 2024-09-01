@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { HubConnectionBuilder } from '@microsoft/signalr';
+import { createConnection } from '../../../app/api/chatApi';
 
 const useChat = () => {
   const [connection, setConnection] = useState(null);
@@ -14,21 +14,6 @@ const useChat = () => {
       });
     }
   }, [connection]);
-
-  const createConnection = async () => {
-    const newConnection = new HubConnectionBuilder()
-      .withUrl('https://localhost:7041/chat')
-      .withAutomaticReconnect()
-      .build();
-
-    try {
-      await newConnection.start();
-      return newConnection;
-    } catch (e) {
-      console.error('Bağlantı kurulamadı: ', e);
-      return null;
-    }
-  };
 
   const joinRoom = async (connection, room) => {
     try {

@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import Heading from "../Heading";
-import ProductCard from "../../../components/Common/Product/ProductCard";
-import { fetchProducts } from "../../../app/slices/product";
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import Heading from '../Heading';
+import ProductCard from '../../../components/Common/Product/ProductCard';
+import { fetchProducts } from '../../../app/thunks/productThunks';
 
 const HotProduct = () => {
   const dispatch = useDispatch();
@@ -11,16 +11,16 @@ const HotProduct = () => {
   const error = useSelector((state) => state.products.error);
 
   useEffect(() => {
-    if (status === "idle") {
+    if (status === 'idle') {
       dispatch(fetchProducts());
     }
   }, [status, dispatch]);
 
-  if (status === "loading") {
+  if (status === 'loading') {
     return <div>Loading...</div>;
   }
 
-  if (status === "failed") {
+  if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
 
@@ -67,16 +67,10 @@ const HotProduct = () => {
             <div className="col-lg-12">
               <div className="tabs_el_wrapper">
                 <div className="tab-content">
-                  <div
-                    id="new_arrival"
-                    className="tab-pane fade show in active"
-                  >
+                  <div id="new_arrival" className="tab-pane fade show in active">
                     <div className="row">
                       {TumUrunler.slice(0, 4).map((urun, index) => (
-                        <div
-                          className="col-lg-3 col-md-4 col-sm-6 col-12"
-                          key={index}
-                        >
+                        <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
                           <ProductCard data={urun} />
                         </div>
                       ))}
@@ -85,10 +79,7 @@ const HotProduct = () => {
                   <div id="trending" className="tab-pane fade">
                     <div className="row">
                       {TumUrunler.slice(3, 5).map((urun, index) => (
-                        <div
-                          className="col-lg-3 col-md-4 col-sm-6 col-12"
-                          key={index}
-                        >
+                        <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
                           <ProductCard data={urun} />
                         </div>
                       ))}
@@ -97,10 +88,7 @@ const HotProduct = () => {
                   <div id="best_sellers" className="tab-pane fade">
                     <div className="row">
                       {TumUrunler.slice(4, 7).map((urun, index) => (
-                        <div
-                          className="col-lg-3 col-md-4 col-sm-6 col-12"
-                          key={index}
-                        >
+                        <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
                           <ProductCard data={urun} />
                         </div>
                       ))}
@@ -109,10 +97,7 @@ const HotProduct = () => {
                   <div id="featured" className="tab-pane fade">
                     <div className="row">
                       {TumUrunler.slice(5, 9).map((urun, index) => (
-                        <div
-                          className="col-lg-3 col-md-4 col-sm-6 col-12"
-                          key={index}
-                        >
+                        <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
                           <ProductCard data={urun} />
                         </div>
                       ))}
@@ -121,10 +106,7 @@ const HotProduct = () => {
                   <div id="on_sall" className="tab-pane fade">
                     <div className="row">
                       {TumUrunler.slice(2, 7).map((urun, index) => (
-                        <div
-                          className="col-lg-3 col-md-4 col-sm-6 col-12"
-                          key={index}
-                        >
+                        <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
                           <ProductCard data={urun} />
                         </div>
                       ))}

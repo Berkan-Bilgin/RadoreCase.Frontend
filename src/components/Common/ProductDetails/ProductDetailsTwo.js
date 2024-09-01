@@ -11,7 +11,7 @@ import { RatingStar } from 'rating-star';
 import img1 from '../../../assets/img/product-image/product1.png';
 import img2 from '../../../assets/img/product-image/product2.png';
 import img3 from '../../../assets/img/product-image/product3.png';
-import { fetchProductById } from '../../../app/slices/product';
+import { fetchProductById } from '../../../app/thunks/productThunks';
 
 const ProductDetailsTwo = () => {
   const dispatch = useDispatch();
@@ -97,7 +97,11 @@ const ProductDetailsTwo = () => {
                   <div className="modal_product_content_one">
                     <h3>{product.title}</h3>
                     <div className="reviews_rating">
-                      <RatingStar maxScore={5} rating={product.rating.rate} id="rating-star-common-2" />
+                      <RatingStar
+                        maxScore={5}
+                        rating={product.rating.rate}
+                        id="rating-star-common-2"
+                      />
                       <span>({product.rating.count} Müşteri Yorumları)</span>
                     </div>
                     <h4>

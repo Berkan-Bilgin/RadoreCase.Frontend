@@ -1,14 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Heading from '../Heading';
 import ProductCard from '../../../components/Common/Product/ProductCard';
 import { fetchProducts } from '../../../app/thunks/productThunks';
+import Pagination from '../../../components/Common/Pagination';
 
 const HotProduct = () => {
   const dispatch = useDispatch();
   const TumUrunler = useSelector((state) => state.products.products);
   const status = useSelector((state) => state.products.status);
   const error = useSelector((state) => state.products.error);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const productsPerPage = 4;
+
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = TumUrunler.slice(indexOfFirstProduct, indexOfLastProduct);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   useEffect(() => {
     if (status === 'idle') {
@@ -69,12 +79,18 @@ const HotProduct = () => {
                 <div className="tab-content">
                   <div id="new_arrival" className="tab-pane fade show in active">
                     <div className="row">
-                      {TumUrunler.slice(0, 4).map((urun, index) => (
+                      {currentProducts.map((urun, index) => (
                         <div className="col-lg-3 col-md-4 col-sm-6 col-12" key={index}>
                           <ProductCard data={urun} />
                         </div>
                       ))}
                     </div>
+                    <Pagination
+                      productsPerPage={productsPerPage}
+                      totalProducts={TumUrunler.length}
+                      paginate={paginate}
+                      currentPage={currentPage}
+                    />
                   </div>
                   <div id="trending" className="tab-pane fade">
                     <div className="row">

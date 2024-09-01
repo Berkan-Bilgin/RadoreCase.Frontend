@@ -19,7 +19,7 @@ const ProductDetailsTwo = () => {
   const product = useSelector((state) => state.products.single);
 
   const baseUrl = process.env.REACT_APP_BASE_URL;
-  const imageUrl = `${baseUrl}${product.img}`;
+  const imageUrl = product && product.img ? `${baseUrl}${product.img}` : img1;
 
   useEffect(() => {
     dispatch(fetchProductById(id)); // API'den ürünü çek

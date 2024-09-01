@@ -38,13 +38,14 @@ const useChat = () => {
     }
   };
 
-  const connect = async () => {
+  const connect = async (name) => {
     if (!connection) {
       const newConnection = await createConnection();
       if (newConnection) {
         setConnection(newConnection);
         // const room = `room-${newConnection.connection.connectionId}`;
-        const room = `Room-User3`;
+        const room = `${name}`;
+        console.log(name);
 
         setRoomName(room);
         await joinRoom(newConnection, room);
@@ -68,7 +69,7 @@ const useChat = () => {
   const sendMessage = async () => {
     if (connection && message) {
       try {
-        await connection.invoke('SendMessage', roomName, 'User3', message);
+        await connection.invoke('SendMessage', roomName, roomName, message);
         setMessage('');
       } catch (e) {
         console.error('Mesaj gönderilemedi:', e);

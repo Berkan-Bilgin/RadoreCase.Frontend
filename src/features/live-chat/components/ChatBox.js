@@ -2,31 +2,38 @@ import React, { useState } from 'react';
 import useChat from '../hooks/useChat';
 import ChatWindow from './ChatWindow';
 
-const ChatBox2 = () => {
+const ChatBox = () => {
   const { connect, disconnect, sendMessage, setMessage, connection, message, messages } = useChat();
 
-  const [isChatWindowOpen, setIsChatWindowOpen] = useState(true);
+  const [username, setUsername] = useState('');
 
-  const toggleChatWindow = () => {
-    setIsChatWindowOpen((prevState) => !prevState);
+  const handleConnect = async () => {
+    await connect(username);
+    setUsername('');
   };
 
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-6">
-          <h2>Chat Box2</h2>
+        <div>
           {!connection ? (
-            <button onClick={connect}>Bağlantı Kur</button>
+            <>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="İsminizi girin..."
+                className="form-control mb-2"
+              />
+              <button onClick={() => handleConnect(username)}>Bağlantı Kur</button>
+            </>
           ) : (
             <button onClick={disconnect} style={{ marginLeft: '10px' }}>
               Bağlantıyı Sonlandır
             </button>
           )}
-          <button onClick={toggleChatWindow}>
-            {isChatWindowOpen ? 'Chat Penceresini Kapat' : 'Chat Penceresini Aç'}
-          </button>
-          {connection && isChatWindowOpen && (
+
+          {connection && (
             <ChatWindow
               messages={messages}
               message={message}
@@ -35,17 +42,9 @@ const ChatBox2 = () => {
             />
           )}
         </div>
-        <div className="col-md-6 bg-danger text-white">
-          <p className="text-white">
-            isConnected: {JSON.stringify(connection?.connection.connectionId)}
-          </p>
-          <p className="text-white">
-            isConnected: {JSON.stringify(connection?.connection._connectionStarted)}
-          </p>
-        </div>
       </div>
     </div>
   );
 };
 
-export default ChatBox2;
+export default ChatBox;

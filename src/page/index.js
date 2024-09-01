@@ -6,6 +6,7 @@ import FashionBanner from './Fashion/Banner';
 import BannerBottom from './Fashion/BannerBottom';
 import HotProduct from './Fashion/HotProduct';
 import Footer from '../components/Common/Footer';
+import LiveChatUser from '../features/live-chat/LiveChatUser';
 
 const Fashion = () => {
   return (
@@ -16,6 +17,7 @@ const Fashion = () => {
       {/* <BannerBottom /> */}
       <HotProduct />
       <Footer />
+      <LiveChatUser />
     </div>
   );
 };

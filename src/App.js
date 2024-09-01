@@ -6,7 +6,7 @@ import './assets/css/style.css';
 import './assets/css/animate.min.css';
 import './assets/css/color.css';
 import Playground from './page/playground/Playground';
-import Chatground2 from './page/playground/Chatground2';
+import Chatground from './page/playground/Chatground';
 import LiveChat from './page/(admin)/LiveChat';
 import ProductPanel from './page/(admin)/ProductPanel';
 
@@ -61,8 +61,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/playground" element={<Chatground2 />} />
-
+          <Route path="/playground" element={<Chatground />} />
           <Route path="/" element={<Fashion />} />
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />

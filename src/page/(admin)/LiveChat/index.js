@@ -10,7 +10,7 @@ const LiveChat = () => {
 
   const handleConnect = async () => {
     const newConnection = new HubConnectionBuilder()
-      .withUrl('https://localhost:7041/chat') // Backend SignalR hub URL'nizi burada belirtin
+      .withUrl('https://localhost:7041/chat')
       .withAutomaticReconnect()
       .build();
 
@@ -19,7 +19,7 @@ const LiveChat = () => {
       console.log('SignalR bağlantısı kuruldu.');
       setConnection(newConnection);
 
-      newConnection.invoke('AddAdminToGroup'); // Admin'i gruba ekleyin
+      newConnection.invoke('AddAdminToGroup');
 
       newConnection.invoke('LoadRooms');
 
@@ -30,13 +30,12 @@ const LiveChat = () => {
 
       newConnection.on('ReceiveRoomList', (roomList) => {
         console.log(roomList);
-        // Oda listesini güncelle
         setRooms(roomList);
       });
 
       newConnection.on('ReceiveMessages', (loadedMessages) => {
         console.log('Gelen Mesajlar:', loadedMessages);
-        setMessages(loadedMessages); // Mesaj geçmişini state'e al
+        setMessages(loadedMessages);
       });
 
       newConnection.on('ReceiveMessage', (user, message) => {
@@ -53,10 +52,10 @@ const LiveChat = () => {
       try {
         await connection.stop();
         console.log('SignalR bağlantısı kesildi.');
-        setConnection(null); // Bağlantıyı temizle
-        setRooms([]); // Oda listesini temizle
-        setMessages([]); // Mesajları temizle
-        setCurrentRoom(null); // Şu anki odayı temizle
+        setConnection(null);
+        setRooms([]);
+        setMessages([]);
+        setCurrentRoom(null);
       } catch (e) {
         console.log('Bağlantı kesilemedi: ', e);
       }
@@ -68,7 +67,7 @@ const LiveChat = () => {
       try {
         await connection.invoke('JoinRoomFromAdmin', room);
         console.log(`Odaya katıldı: ${room}`);
-        setCurrentRoom(room); // Şu anki odayı ayarla
+        setCurrentRoom(room);
 
         // Odadaki mesaj geçmişini yükle
         await connection.invoke('LoadMessages', room);
@@ -82,7 +81,7 @@ const LiveChat = () => {
     if (connection && message && currentRoom) {
       try {
         await connection.invoke('SendMessage', currentRoom, 'Admin', message);
-        setMessage(''); // Mesaj kutusunu temizle
+        setMessage('');
       } catch (e) {
         console.error('Mesaj gönderilemedi:', e);
       }
@@ -112,11 +111,8 @@ const LiveChat = () => {
           {currentRoom && (
             <div>
               <h3>Oda: {currentRoom}</h3>
-              <div className="card chat-window">
-                <div
-                  className="card-body chat-body"
-                  style={{ height: '300px', overflowY: 'scroll' }}
-                >
+              <div className="card ">
+                <div className="card-body" style={{ height: '300px', overflowY: 'scroll' }}>
                   {messages.map((m, index) => (
                     <div key={index} className="chat-message">
                       <strong>{m.userName || m.user}:</strong> {m.message}

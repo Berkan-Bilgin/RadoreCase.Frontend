@@ -48,11 +48,7 @@
     cursor: pointer;
   }
   
-  .chat-window-body {
-    /* flex: 1;
-    overflow-y: auto;
-    margin-bottom: 1rem; */
-  }
+
   
   .chat-window-input {
     width: 100%;
